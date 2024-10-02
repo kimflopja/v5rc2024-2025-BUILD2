@@ -1,2 +1,4 @@
-# Written for V5RC High Stakes By Tal Loquias
+# Team 48700X High Stakes Code
+*** Written by Tao Loquias ***
+
 Read ORV <3
