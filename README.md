@@ -1,2 +1,2 @@
-# Written for V5RC High Stakes By Tao Loquias
-# Read ORV <3
+# Written for V5RC High Stakes By Tal Loquias
+Read ORV <3
