@@ -19,8 +19,8 @@ void opcontrol() {
 	while (true) {
 
 		// *** Take your pick ***
-		// opcontrol_tankdrive(); // Tank drive
-		opcontrol_arcadedrive(); // Arcade drive
+		opcontrol_tankdrive(); // Tank drive
+		//opcontrol_arcadedrive(); // Arcade drive
 
 		// . . .
     	// More op control code goes here (subsystem buttons, idk)
