@@ -5,5 +5,5 @@ void autonomous() {
 	inertial.tare(); //Reset inertial posiiton to 0
 	// Reset drive sensors to 0
 	// Set brake to ___
-	//Auton selector
+	//Auton selectoret
 }
