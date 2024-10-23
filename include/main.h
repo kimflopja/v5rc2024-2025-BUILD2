@@ -78,6 +78,7 @@ void opcontrol(void);
 #include "drive/drive.hpp"
 #include "subsystems/globals.hpp"
 #include "subsystems/util.hpp"
+#include "subsystems/subsystem.hpp"
 // #include "calc/pid.hpp"
 #endif
 

@@ -8,4 +8,6 @@
  */
 void initialize() {
 	pros::lcd::initialize();
+	
+	lift.tare_position(); // Set ABS lift position to ZERO
 }

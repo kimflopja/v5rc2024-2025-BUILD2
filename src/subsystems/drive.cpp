@@ -35,22 +35,38 @@ void setArcadeDrive(int rotate, int drive){
 
     if(drive >= 0){
         if(rotate >= 0){ // I Quadrant
-            left_motor1.move(maximum);         
+            left_motor1.move(maximum);
+            left_motor2.move(maximum);
+            left_motor3.move(maximum);                 
             right_motor1.move(difference);
+            right_motor2.move(difference);
+            right_motor3.move(difference);
         }
         else{ // II Quadrant
             left_motor1.move(total);
+            left_motor2.move(total);
+            left_motor3.move(total); 
             right_motor1.move(maximum);
+            right_motor2.move(maximum);
+            right_motor3.move(maximum);
         }
     }
     else{
         if(rotate >= 0){ //IV Quadrant
             left_motor1.move(total);
+            left_motor2.move(total);
+            left_motor3.move(total);
             right_motor1.move(-maximum);
+            right_motor2.move(-maximum);
+            right_motor3.move(-maximum);
         }
         else{ //III Quadrant
             left_motor1.move(-maximum);
+            left_motor2.move(-maximum);
+            left_motor3.move(-maximum);
             right_motor1.move(difference);
+            right_motor2.move(difference);
+            right_motor3.move(difference);
         }
     }
 }

@@ -28,7 +28,11 @@ extern pros::Motor right_motor3;
 * Subsystem motors
 */
 
-extern pros::adi::Pneumatics clamp_piston;  
+extern pros::Motor lift;     
+
+extern pros::Motor intake;
+
+extern pros::adi::Pneumatics clamp_piston1;  
 
 /*
 * Pneumatics
