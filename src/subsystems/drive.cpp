@@ -122,3 +122,7 @@ void tarePosition(){
 * Reset encoders
 */
 
+/*
+* Potentiometer
+*/
+

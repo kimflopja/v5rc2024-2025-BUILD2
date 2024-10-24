@@ -19,6 +19,7 @@
 * Intake
 */
 void intake_func();
+void setIntake(int power);
 
 
 /*

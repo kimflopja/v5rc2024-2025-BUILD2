@@ -9,5 +9,20 @@
 void initialize() {
 	pros::lcd::initialize();
 	
+	// Tare Position //
 	lift.tare_position(); // Set ABS lift position to ZERO
+	intake.tare_position(); // Set ABS lift position to ZERO
+
+	// Set Motor Brakes to ____
+	// Drivetrain: COAST
+	left_motor1.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	left_motor2.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	left_motor3.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	right_motor1.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	right_motor2.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	right_motor3.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	// Intake:
+	//intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	// Lift:
+	//lift.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 }
