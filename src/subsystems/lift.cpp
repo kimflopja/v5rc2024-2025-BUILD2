@@ -9,6 +9,7 @@
 // if down -> down a level
 void lift_func(){
 
+  // Keep in mind: FWD is DOWN! 
   // Placeholder 
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
       lift.move_absolute(150, 50);

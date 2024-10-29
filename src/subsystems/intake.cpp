@@ -3,7 +3,7 @@
 // r2 (intake down)
 // r1 (intake up)
 // Hit button to have it run
-// TOp button run, bottom button run reverse. 
+// Top button run, bottom button run reverse. 
 // Hit same button to stop it
 
 void setIntake(int state){
