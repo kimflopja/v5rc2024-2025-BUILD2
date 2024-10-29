@@ -24,8 +24,11 @@ void opcontrol() {
 
 		// . . .
     	// More op control code goes here
+		// Clamp
 		clamp_piston();
+		// Lift
 		lift_func();
+		// Intake
 		intake_func();
     	// . . .
 

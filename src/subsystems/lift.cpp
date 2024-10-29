@@ -5,8 +5,8 @@
 // lift state 2 - raise to height of short stake
 // lift state 3 - raise to height of tall stake
 
-// if up -> up a level
-// if down -> down a level
+// if up button pressed -> up a level
+// if down button pressed -> down a level
 void lift_func(){
 
   // Keep in mind: FWD is DOWN! 
