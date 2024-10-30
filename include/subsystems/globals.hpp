@@ -32,14 +32,12 @@ extern pros::Motor lift;
 
 extern pros::Motor intake;
 
-extern pros::adi::Pneumatics clamp_piston1;  
-
 /*
 * Pneumatics
 */
 
 
-
+extern pros::adi::Pneumatics clamp_piston1;  
 
 
 /*

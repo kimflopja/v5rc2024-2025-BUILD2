@@ -25,6 +25,7 @@ void setIntake(int power);
 /*
 * Lift
 */
+void setLift(int liftState);
 void lift_func();
 
 

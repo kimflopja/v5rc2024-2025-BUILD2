@@ -11,7 +11,7 @@ void setIntake(int power){
 }
 
 void intake_func(){
-    int intakeState = 0;
+    int intakeState = 0; // Try static int so it doesnt create and destroy the integer each time ?
     if (controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
         if(intakeState = 0){
             intakeState = 1;
