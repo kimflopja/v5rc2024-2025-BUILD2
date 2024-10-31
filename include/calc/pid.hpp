@@ -10,6 +10,7 @@
 * A class implementing PID
 */
 class PID{ 
+    public:
 
     /*
     * Variables
@@ -33,7 +34,7 @@ class PID{
 
     
 
-    double reset_PID(){
+    void reset_PID(){
         
         // Reset PID values
         error = 0.0;
@@ -42,8 +43,7 @@ class PID{
 
         // Reset prev_time and prev_error
         prev_time = 0;
-        prev_error = 0;
-
+        prev_error = 0; 
     }
 
     double get_PID_output(double setpoint, double sensor_value){
@@ -55,12 +55,10 @@ class PID{
         // error = setpoint - current sensor value
         // aka PROPORTIONAL.
         error = setpoint - sensor_value;
-
         // times by proportional gain constant
         error = error*kP;
 
         // Get the current time
-
         // Change in time
         delta_time = ts - prev_time;
         //Change in error
@@ -96,3 +94,4 @@ class PID{
     }
 
 };
+

@@ -90,8 +90,8 @@ void opcontrol_tankdrive(){
 */
 void opcontrol_arcadedrive(){
     // *** LEFT joystick ***
-    int x = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int y = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    int x = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    int y = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     //Extra precision
     setArcadeDrive((x*abs(x))/100, (y*abs(y))/100);
 }
@@ -108,7 +108,7 @@ void opcontrol_arcadedrive(){
 /*
 * Sets the "absolute" zero point of the motors to the current position
 */
-void tarePosition(){
+void resetDriveEncoders(){
     left_motor1.tare_position();
     left_motor2.tare_position();
     left_motor3.tare_position();
@@ -119,8 +119,14 @@ void tarePosition(){
 }
 
 /*
-* Reset encoders
+* Get the avg drive encoder value
 */
+double avgDriveEncoderValue(){
+    return((left_motor1.get_position() + left_motor2.get_position() + left_motor3.get_position() +
+    right_motor1.get_position() + right_motor2.get_position() + right_motor3.get_position())/6);
+}
+
+
 
 /*
 * Potentiometer

@@ -79,7 +79,7 @@ void opcontrol(void);
 #include "subsystems/globals.hpp"
 #include "subsystems/util.hpp"
 #include "subsystems/subsystem.hpp"
-// #include "calc/pid.hpp"
+#include "calc/pid.hpp"
 #endif
 
 #endif  // _PROS_MAIN_H_

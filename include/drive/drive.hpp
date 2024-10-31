@@ -29,7 +29,7 @@ void setDrive(int leftJoystick, int rightJoystick);
 /*
 * Set the motors to a value for ARCADE
 */
-void setArcadeDrive(int x, int y);
+void setArcadeDrive(int rotate, int drive);
 
 /*
 * Tank drive
@@ -65,10 +65,11 @@ void drive_turn();
 /*
 * sets the zero point of the motors to the current position
 */
-void tarePosition();
+void resetDriveEncoders();
 
 /*
-* Resets drive sensors at the start of opcontrol
+* Gets the avg drive pos
 */
-void opcontrol_drive_sensors_reset();
+double avgDriveEncoderValue();
+
 
