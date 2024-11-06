@@ -22,7 +22,7 @@ void initialize() {
 	right_motor2.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	right_motor3.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	// Intake:
-	//intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	// Lift:
-	//lift.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 }

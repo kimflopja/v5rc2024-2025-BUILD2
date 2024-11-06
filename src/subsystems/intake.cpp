@@ -6,28 +6,38 @@
 // Top button run, bottom button run reverse. 
 // Hit same button to stop it
 
+bool r1Pressed = false; 
+bool r2Pressed = true;
+bool intakeMove = false;
+
 void setIntake(int power){
     intake.move(power);
 }
 
+// Rising edge circuit
 void intake_func(){
-    int intakeState = 0; // Try static int so it doesnt create and destroy the integer each time ?
-    if (controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)){
-        if(intakeState = 0){
-            intakeState = 1;
-        } else {
-            intakeState = 0;
-        }
+    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1) && !r1Pressed){
+        r1Pressed = true;
+        intakeMove = !intakeMove;
     }
-    if (controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
-        if(intakeState = 0){
-            intakeState = -1;
-        } else {
-            intakeState = 0;
-        }
-    }
-    // int intakeState = 50 * ((controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) - (controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)));
-    int intakePower = 127 * intakeState;
+    else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) r1Pressed = false;
 
-    setIntake(intakePower);
+    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R2) && !r2Pressed){
+        r2Pressed = true;
+        intakeMove = !intakeMove;
+    }
+    else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) r2Pressed = false;
+
+    if(intakeMove && r1Pressed){
+        r2Pressed = false;
+        setIntake(127);
+    }
+    if(intakeMove && r2Pressed) {
+        r1Pressed = false;
+        setIntake(-127);
+    }
+    
+
+    //int intakeState = 110 * ((controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) - (controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_R2))); 
+    //setIntake(intakeState);
 } 

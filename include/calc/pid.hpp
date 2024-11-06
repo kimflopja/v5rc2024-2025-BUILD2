@@ -25,11 +25,11 @@ class PID{
     double derivative = 0.0; // Derivative Term
 
     /*
-    * Constants to be set!!!
+    * Constants to be set!!! 1 is a placeholder
     */
-    double kP;
-    double kI;
-    double kD;
+    double kP = 1;
+    double kI = 1;
+    double kD = 1;
     double helpful_range = 1000;
 
     

@@ -7,7 +7,7 @@
 * 
 */
 
-
+PID chassis;
 
 /*
 * Set the motors to a value
@@ -98,6 +98,24 @@ void opcontrol_arcadedrive(){
 
 
 
+/*
+*
+* ///////////////// Autonomous Movement Functions ///////////////// 
+* 
+*/
+
+
+
+/*
+* Drive fwd
+*/
+void drive_auton(){
+    setArcadeDrive(5, 0);
+}
+
+
+
+
 
 /*
 *
@@ -124,6 +142,36 @@ void resetDriveEncoders(){
 double avgDriveEncoderValue(){
     return((left_motor1.get_position() + left_motor2.get_position() + left_motor3.get_position() +
     right_motor1.get_position() + right_motor2.get_position() + right_motor3.get_position())/6);
+}
+
+
+
+/*
+* Drive with PID output
+*/
+void auton_drive(int goal, int speed){
+    // Reset 
+    resetDriveEncoders(); // Reset drive encoders
+    chassis.reset_PID();
+    // Drive forward
+    goal = chassis.get_PID_output(goal, avgDriveEncoderValue()); // Get pid output
+    while(avgDriveEncoderValue() < goal){
+        setDrive(speed, 0); // Move
+    }
+    // Slight pause
+    pros::delay(50); // Delay for some time
+    setDrive(0,0);
+}
+
+
+
+/*
+* Turn with PID output
+*/
+void auton_turn(int degrees){
+    // Reset 
+    pros::delay(50); // Delay for some time
+    setDrive(0,0);
 }
 
 

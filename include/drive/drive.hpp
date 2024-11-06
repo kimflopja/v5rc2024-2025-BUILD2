@@ -6,7 +6,6 @@
 
 #include "api.h"
 
-
 /*
 *
 * ///////////////// Movement Functions :3 ///////////////// 
@@ -50,9 +49,9 @@ void opcontrol_arcadedrive();
 
 
 /*
-* Turning
+* Drive fwd with PID output
 */
-void drive_turn();
+void auton_drive(int goal, int speed);
 
 
 

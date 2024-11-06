@@ -80,6 +80,7 @@ void opcontrol(void);
 #include "subsystems/util.hpp"
 #include "subsystems/subsystem.hpp"
 #include "calc/pid.hpp"
+#include "subsystems/auton.hpp"
 #endif
 
 #endif  // _PROS_MAIN_H_
