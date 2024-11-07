@@ -40,9 +40,8 @@ void lift_func(){
   if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && !buttonDownRegistered) {
     if(liftState > 0) liftState --;
     else liftState = 0;
-
     buttonDownRegistered = true;
-  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) buttonUpRegistered = false;
+  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) buttonDownRegistered = false;
   pros::lcd::print(0, "liftState: %d", liftState);
 
   setLift(liftState);

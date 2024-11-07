@@ -156,7 +156,7 @@ void auton_drive(int goal, int speed){
     // Drive forward
     goal = chassis.get_PID_output(goal, avgDriveEncoderValue()); // Get pid output
     while(avgDriveEncoderValue() < goal){
-        setDrive(speed, 0); // Move
+        setDrive(speed, speed); // Move
     }
     // Slight pause
     pros::delay(50); // Delay for some time
