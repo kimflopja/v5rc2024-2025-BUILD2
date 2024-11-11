@@ -3,8 +3,7 @@
 // Out of 127
 const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
-const int SWING_SPEED = 90;
-
+const int AUTON_DELAY_TIME = 50;
 
 /*
 Both autons similar.
@@ -31,22 +30,38 @@ void farSide(){
     /*
     far side:
     1. out
-    auton_drive(-100, 20);
+    auton_drive(-DRIVE_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
     2. clamp, then go back
-    auton_drive(-50, 20);
+    auton_drive(-DRIVE_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
     clamp_piston1.retract();
+    pros::delay(AUTON_DELAY_TIME);
     3. release intake
     setLift(3);
+    pros::delay(AUTON_DELAY_TIME);
     4. spin
     setIntake(100);
+    pros::delay(AUTON_DELAY_TIME);
     5. turn
-    auton_turn(90, 20);
+    auton_turn(TURN_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
     6. drive fwd to get red ring
-    auton_drive(100, 20);
-    7. drop ?
+    auton_drive(DRIVE_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
+    7. drop 
     clamp_piston1.extend();
-    8. touch side of middle
-    auton_turn(90, 20);
-    auton_drive(200, 20);
+    pros::delay(AUTON_DELAY_TIME);
+    8. turn
+    auton_turn(TURN_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
+    9. drive fwd to side of middle
+    auton_drive(DRIVE_SPEED, 20);
+    pros::delay(AUTON_DELAY_TIME);
     */
+}
+
+void autonSkills(){
+
+
 }

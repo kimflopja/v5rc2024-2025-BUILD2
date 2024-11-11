@@ -79,6 +79,7 @@ void opcontrol(void);
 #include "subsystems/globals.hpp"
 #include "subsystems/util.hpp"
 #include "subsystems/subsystem.hpp"
+#include "subsystems/selector.hpp"
 #include "calc/pid.hpp"
 #include "subsystems/auton.hpp"
 #endif

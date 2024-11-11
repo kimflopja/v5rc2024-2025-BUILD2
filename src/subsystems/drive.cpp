@@ -127,6 +127,8 @@ void resetDriveEncoders(){
     right_motor3.tare_position();
 }
 
+
+
 /*
 * Get the avg drive encoder value
 */
@@ -138,11 +140,30 @@ double avgDriveEncoderValue(){
 
 
 /*
+* Get left
+*/
+double getLeftPosition(){
+    return((left_motor1.get_position() + left_motor2.get_position() + left_motor3.get_position())/3);
+}
+
+
+
+/*
+* Get right
+*/
+double getRightPosition(){
+    return((right_motor1.get_position() + right_motor2.get_position() + right_motor3.get_position())/3);
+}
+
+
+
+/*
 * Reset PID values
 */
 void resetPID(){
     chassis.reset_PID();
 }
+
 
 
 /*
@@ -156,18 +177,17 @@ void auton_drive(int goal, int speed){
     // Reset
     resetDriveEncoders();
 
-    // Get PID output 
-    //goal = chassis.get_PID_output(abs(goal), avgDriveEncoderValue()); // Get pid output
-
     // Drive until goal is reached
     while(avgDriveEncoderValue() < abs(goal)){
-        setDrive(speed*direction, speed*direction); // Move
+        setDrive(speed*direction + inertial.get_rotation(), speed*direction - inertial.get_rotation()); // Self correcting driving ?
         pros::delay(10);
     }
+
+    // Wait for some time
+    pros::delay(50); 
     // Short brake
     setDrive(-10*direction, -10*direction);
-    // Slight pause
-    pros::delay(50); // Delay for some time
+    // Stop
     setDrive(0,0);
 }
 
@@ -182,20 +202,34 @@ void auton_turn(int degrees, int speed){
     // Reset inertial
     inertial.tare();
     // Turn until degrees is reached
-    pros::lcd::print(0, "rotation: %f", inertial.get_rotation());
-    setDrive(-speed * direction, speed*direction);
+    pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
     while(fabs(inertial.get_rotation()) < abs(degrees)){ 
+        setDrive(-speed * direction, speed*direction);
         pros::delay(10);
-        pros::lcd::print(0, "rotation: %f", inertial.get_rotation());
+        pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
     }
+
+    // Wait to let the robot settle
     pros::delay(100);
-    // Check for inaccuracies here ?
+
+    // Self correct here
+    if(fabs(inertial.get_rotation()) > abs(degrees)){
+        while(fabs(inertial.get_rotation()) > abs(degrees)){ 
+        setDrive(0.75 * -speed * direction, 0.75 * speed * direction); // Speed is lessened to slow it
+        pros::delay(10);
+        pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
+        }
+    }
+    else if(fabs(inertial.get_rotation()) < abs(degrees)){
+        while(fabs(inertial.get_rotation()) < abs(degrees)){ 
+        setDrive(0.75 * -speed * direction, 0.75 * speed*direction);
+        pros::delay(10);
+        pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
+        }
+    }
+    
+    // Stop
     setDrive(0,0);
 }
 
-
-
-/*
-* Potentiometer
-*/
 

@@ -4,3 +4,4 @@
 
 void closeSide();
 void farSide();
+void autonSkills();

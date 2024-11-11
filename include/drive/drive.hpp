@@ -79,6 +79,16 @@ void resetDriveEncoders();
 double avgDriveEncoderValue();
 
 /*
+* Get left position
+*/
+double getLeftPosition();
+
+/*
+* Get left position
+*/
+double getRightPosition();
+
+/*
 * Reset PID
 */
 void resetPID();
