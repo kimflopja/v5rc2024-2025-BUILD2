@@ -8,7 +8,7 @@
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::print(1, "stream 25ji no jounetsu :3");
+	pros::lcd::print(1, "hi");
 	
 	// Tare Position //
 	lift.tare_position(); // Set ABS lift position to ZERO
@@ -33,5 +33,5 @@ void initialize() {
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	// Delay
-	pros::delay(2000);
+	pros::delay(1000);
 }

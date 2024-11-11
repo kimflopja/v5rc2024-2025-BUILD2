@@ -149,14 +149,18 @@ void resetPID(){
 * Drive with PID output
 */
 void auton_drive(int goal, int speed){
+
     // Get direction
     int direction = abs(goal)/goal;
-    // Reset 
-    resetDriveEncoders(); // Reset drive encoders
+
+    // Reset
+    resetDriveEncoders();
+
     // Get PID output 
-    goal = chassis.get_PID_output(abs(goal), fabs(avgDriveEncoderValue())); // Get pid output
+    //goal = chassis.get_PID_output(abs(goal), avgDriveEncoderValue()); // Get pid output
+
     // Drive until goal is reached
-    while(fabs(avgDriveEncoderValue()) < abs(goal)){
+    while(avgDriveEncoderValue() < abs(goal)){
         setDrive(speed*direction, speed*direction); // Move
         pros::delay(10);
     }
@@ -178,11 +182,11 @@ void auton_turn(int degrees, int speed){
     // Reset inertial
     inertial.tare();
     // Turn until degrees is reached
-    pros::lcd::print(0, "heading: %f", inertial.get_rotation());
-    while(fabs(inertial.get_rotation()) < abs(degrees)){ // get heading returns a value from 0s-360
-        setDrive(-speed * direction, speed*direction);
+    pros::lcd::print(0, "rotation: %f", inertial.get_rotation());
+    setDrive(-speed * direction, speed*direction);
+    while(fabs(inertial.get_rotation()) < abs(degrees)){ 
         pros::delay(10);
-        pros::lcd::print(0, "heading: %f", inertial.get_rotation());
+        pros::lcd::print(0, "rotation: %f", inertial.get_rotation());
     }
     pros::delay(100);
     // Check for inaccuracies here ?
