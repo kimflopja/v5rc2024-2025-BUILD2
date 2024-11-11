@@ -8,11 +8,11 @@
 namespace util{
     
     /*
-    * ///////////////// Functions :3 ///////////////// 
+    * ///////////////// stuff :3 ///////////////// 
     * 
     */
 
-    // *** Print something VERY important!! ***
+    // *** Auton selector ***
     #if 0
     void printThing(){
         pros::lcd::print(0, "test\n");

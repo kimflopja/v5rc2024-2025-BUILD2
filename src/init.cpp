@@ -8,10 +8,16 @@
  */
 void initialize() {
 	pros::lcd::initialize();
+	pros::lcd::print(1, "stream 25ji no jounetsu :3");
 	
 	// Tare Position //
 	lift.tare_position(); // Set ABS lift position to ZERO
 	intake.tare_position(); // Set ABS lift position to ZERO
+	// Calibrate //
+	inertial.reset(true);
+	while(inertial.is_calibrating()){
+		pros::delay(100);
+	}
 
 	// Set Motor Brakes to ____
 	// Drivetrain: COAST
@@ -25,4 +31,7 @@ void initialize() {
 	intake.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
 	// Lift:
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+
+	// Delay
+	pros::delay(2000);
 }

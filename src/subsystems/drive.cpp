@@ -107,21 +107,12 @@ void opcontrol_arcadedrive(){
 
 
 /*
-* Drive fwd
-*/
-void drive_auton(){
-    setArcadeDrive(5, 0);
-}
-
-
-
-
-
-/*
 *
 * ///////////////// Telemetry Functions :3 ///////////////// 
 * 
 */
+
+
 
 /*
 * Sets the "absolute" zero point of the motors to the current position
@@ -147,17 +138,30 @@ double avgDriveEncoderValue(){
 
 
 /*
+* Reset PID values
+*/
+void resetPID(){
+    chassis.reset_PID();
+}
+
+
+/*
 * Drive with PID output
 */
 void auton_drive(int goal, int speed){
+    // Get direction
+    int direction = abs(goal)/goal;
     // Reset 
     resetDriveEncoders(); // Reset drive encoders
-    chassis.reset_PID();
-    // Drive forward
-    goal = chassis.get_PID_output(goal, avgDriveEncoderValue()); // Get pid output
-    while(avgDriveEncoderValue() < goal){
-        setDrive(speed, speed); // Move
+    // Get PID output 
+    goal = chassis.get_PID_output(abs(goal), fabs(avgDriveEncoderValue())); // Get pid output
+    // Drive until goal is reached
+    while(fabs(avgDriveEncoderValue()) < abs(goal)){
+        setDrive(speed*direction, speed*direction); // Move
+        pros::delay(10);
     }
+    // Short brake
+    setDrive(-10*direction, -10*direction);
     // Slight pause
     pros::delay(50); // Delay for some time
     setDrive(0,0);
@@ -166,11 +170,22 @@ void auton_drive(int goal, int speed){
 
 
 /*
-* Turn with PID output
+* Turn
 */
-void auton_turn(int degrees){
-    // Reset 
-    pros::delay(50); // Delay for some time
+void auton_turn(int degrees, int speed){
+    // Get direction
+    int direction = abs(degrees) / degrees;
+    // Reset inertial
+    inertial.tare();
+    // Turn until degrees is reached
+    pros::lcd::print(0, "heading: %f", inertial.get_rotation());
+    while(fabs(inertial.get_rotation()) < abs(degrees)){ // get heading returns a value from 0s-360
+        setDrive(-speed * direction, speed*direction);
+        pros::delay(10);
+        pros::lcd::print(0, "heading: %f", inertial.get_rotation());
+    }
+    pros::delay(100);
+    // Check for inaccuracies here ?
     setDrive(0,0);
 }
 

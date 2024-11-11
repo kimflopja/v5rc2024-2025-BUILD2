@@ -49,9 +49,16 @@ void opcontrol_arcadedrive();
 
 
 /*
-* Drive fwd with PID output
+* Drive auton
 */
 void auton_drive(int goal, int speed);
+
+
+
+/*
+* Drive turn
+*/
+void auton_turn(int degrees, int speed);
 
 
 
@@ -71,4 +78,7 @@ void resetDriveEncoders();
 */
 double avgDriveEncoderValue();
 
-
+/*
+* Reset PID
+*/
+void resetPID();

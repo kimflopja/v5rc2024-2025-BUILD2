@@ -33,7 +33,6 @@ void opcontrol() {
 		intake_func();
     	// . . .
 
-		drive_test(5,0);
 
 		// Delay 
 		pros::delay(util::DELAY_TIME); 

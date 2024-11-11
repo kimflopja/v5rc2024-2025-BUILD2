@@ -11,9 +11,9 @@ pros::Controller controller_master(pros::E_CONTROLLER_MASTER);
 */
 
 // *** Change ports according to what we use ***
-// Test robo has : 19, 20 and -1 -2
-pros::Imu inertial(10); 
-
+// Inertial: 8
+pros::Imu inertial(17); 
+ 
 // Top Left: -11, Green
 // Bottom Left: 20 (Back), 6 (Front), Green
 pros::Motor left_motor1(19, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);

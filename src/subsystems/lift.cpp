@@ -21,10 +21,10 @@ void setLift(int liftState){
       lift.move_absolute(150, 50); 
       break;
     case 2: // Height of short stake
-      lift.move_absolute(250, 50); 
+      lift.move_absolute(300, 50); 
       break;
     case 3: // Height of tallest stake
-      lift.move_absolute(350, 50); 
+      lift.move_absolute(500, 50); 
       break;
   }
 }
@@ -42,7 +42,6 @@ void lift_func(){
     else liftState = 0;
     buttonDownRegistered = true;
   } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) buttonDownRegistered = false;
-  pros::lcd::print(0, "liftState: %d", liftState);
 
   setLift(liftState);
   pros::delay(50); // Delay
