@@ -170,23 +170,21 @@ void resetPID(){
 * Drive with PID output
 */
 void auton_drive(int goal, int speed){
-
     // Get direction
     int direction = abs(goal)/goal;
-
     // Reset
     resetDriveEncoders();
-
     // Drive until goal is reached
-    while(avgDriveEncoderValue() < abs(goal)){
-        setDrive(speed*direction + inertial.get_rotation(), speed*direction - inertial.get_rotation()); // Self correcting driving ?
+    while(fabs(avgDriveEncoderValue()) < abs(goal)){
+        setDrive(speed*direction, speed*direction); // Self correcting driving ?
         pros::delay(10);
     }
-
-    // Wait for some time
+    // Let it settle
     pros::delay(50); 
     // Short brake
     setDrive(-10*direction, -10*direction);
+    // Wait
+    pros::delay(50); 
     // Stop
     setDrive(0,0);
 }
@@ -215,7 +213,7 @@ void auton_turn(int degrees, int speed){
     // Self correct here
     if(fabs(inertial.get_rotation()) > abs(degrees)){
         while(fabs(inertial.get_rotation()) > abs(degrees)){ 
-        setDrive(0.75 * -speed * direction, 0.75 * speed * direction); // Speed is lessened to slow it
+        setDrive(0.75 * speed * direction, 0.75 * -speed * direction); // Speed is lessened to slow it
         pros::delay(10);
         pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
         }

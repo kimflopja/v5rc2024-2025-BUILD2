@@ -33,3 +33,4 @@ void lift_func();
 * Clamp
 */
 void clamp_piston();
+void setClamp(int clampState);

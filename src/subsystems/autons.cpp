@@ -1,9 +1,9 @@
 #include "main.h"
 
 // Out of 127
-const int DRIVE_SPEED = 110;
-const int TURN_SPEED = 90;
-const int AUTON_DELAY_TIME = 50;
+const int DRIVE_SPEED = 30;
+const int TURN_SPEED = 20;
+const int AUTON_DELAY_TIME = 500;
 
 /*
 Both autons similar.
@@ -26,37 +26,37 @@ void closeSide(){
     */
 }
 
+// Far Side Auton
 void farSide(){
-    /*
-    far side:
-    1. out
-    auton_drive(-DRIVE_SPEED, 20);
+    // 1. Go out
+    auton_drive(-570, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    2. clamp, then go back
-    auton_drive(-DRIVE_SPEED, 20);
+    // 2. Clamp, then go back
+    clamp_piston1.extend();
     pros::delay(AUTON_DELAY_TIME);
-    clamp_piston1.retract();
+    auton_drive(-100, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    3. release intake
+    // 3. Release intake
     setLift(3);
     pros::delay(AUTON_DELAY_TIME);
-    4. spin
+    // 4. Spin
     setIntake(100);
     pros::delay(AUTON_DELAY_TIME);
-    5. turn
-    auton_turn(TURN_SPEED, 20);
+    // 5. Turn
+    auton_turn(90, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
+    /*
     6. drive fwd to get red ring
-    auton_drive(DRIVE_SPEED, 20);
+    auton_drive(20, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     7. drop 
     clamp_piston1.extend();
     pros::delay(AUTON_DELAY_TIME);
     8. turn
-    auton_turn(TURN_SPEED, 20);
+    auton_turn(20, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     9. drive fwd to side of middle
-    auton_drive(DRIVE_SPEED, 20);
+    auton_drive(20, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     */
 }
