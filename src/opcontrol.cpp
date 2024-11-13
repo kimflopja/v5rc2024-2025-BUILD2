@@ -20,6 +20,7 @@ void opcontrol() {
 
 		
 		// *** Take your pick ***
+		// *** If skills, arcade drive ***
 		//opcontrol_tankdrive(); // Tank drive
 		opcontrol_arcadedrive(); // Arcade drive
 
@@ -32,7 +33,6 @@ void opcontrol() {
 		// Intake
 		intake_func();
     	// . . .
-
 
 		// Delay 
 		pros::delay(util::DELAY_TIME); 

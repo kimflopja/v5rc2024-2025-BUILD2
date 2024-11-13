@@ -24,7 +24,7 @@ void setLift(int liftState){
       lift.move_absolute(300, 50); 
       break;
     case 3: // Height of tallest stake
-      lift.move_absolute(500, 50); 
+      lift.move_absolute(400, 50); 
       break;
   }
 }

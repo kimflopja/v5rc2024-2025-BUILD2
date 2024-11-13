@@ -198,33 +198,34 @@ void auton_turn(int degrees, int speed){
     // Get direction
     int direction = abs(degrees) / degrees;
     // Reset inertial
-    inertial.tare();
+    inertial.set_rotation(0);
     // Turn until degrees is reached
-    pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
+    pros::lcd::print(2, "rotation: %f", inertial.get_rotation()); // Troubleshooting
     while(fabs(inertial.get_rotation()) < abs(degrees)){ 
-        setDrive(-speed * direction, speed*direction);
+        setDrive(-speed*direction, speed*direction);
         pros::delay(10);
         pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
     }
-
+    
     // Wait to let the robot settle
     pros::delay(100);
-
+    
     // Self correct here
     if(fabs(inertial.get_rotation()) > abs(degrees)){
         while(fabs(inertial.get_rotation()) > abs(degrees)){ 
-        setDrive(0.75 * speed * direction, 0.75 * -speed * direction); // Speed is lessened to slow it
+        setDrive(0.50 * speed * direction, 0.50 * -speed * direction); // Speed is lessened to slow it
         pros::delay(10);
         pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
         }
     }
     else if(fabs(inertial.get_rotation()) < abs(degrees)){
         while(fabs(inertial.get_rotation()) < abs(degrees)){ 
-        setDrive(0.75 * -speed * direction, 0.75 * speed*direction);
+        setDrive(0.50 * -speed * direction, 0.50 * speed*direction);
         pros::delay(10);
         pros::lcd::print(0, "rotation: %f", inertial.get_rotation()); // Troubleshooting
         }
     }
+    
     
     // Stop
     setDrive(0,0);
