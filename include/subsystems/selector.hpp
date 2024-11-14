@@ -7,6 +7,7 @@
 #include "api.h"
 
 extern int autonChosen;
+extern int skillsOrHTH;
 
 /*
 *
