@@ -31,8 +31,7 @@ void farSide(){
     // 1. Go out
     auton_drive(-600, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    // 2. Clamp and go back
-    // Clamp
+    // 2. Clamp
     clamp_piston1.extend();
     pros::delay(AUTON_DELAY_TIME);
     // 3. Release intake
@@ -40,19 +39,16 @@ void farSide(){
     pros::delay(AUTON_DELAY_TIME);
     // 4. Spin
     setIntake(110);
-    //Drive FWD a little
-    //auton_drive(150, DRIVE_SPEED);
     // 5. Turn
     auton_turn(-60, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 6. Drive fwd to get red ring
     auton_drive(275, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    // Drive fwd a bit more to push the top ring off and get bottom ring
-    // Turn all the way
+    // 7. Turn all the way
     auton_turn(-160, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    // 7. Drop the stake
+    // 8. Drop the stake
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
     // 9. Drive FWD to side of middle, ride up
