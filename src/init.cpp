@@ -8,10 +8,11 @@
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::print(1, "hi");
+	pros::lcd::print(1, "nightcord @25 is best");
 	
 	// Tare Position //
 	lift.tare_position(); // Set ABS lift position to ZERO
+	setLift(0);
 	intake.tare_position(); // Set ABS lift position to ZERO
 	// Calibrate //
 	inertial.reset(true);
@@ -33,5 +34,5 @@ void initialize() {
 	lift.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
 	// Delay
-	pros::delay(1000);
+	pros::delay(500);
 }

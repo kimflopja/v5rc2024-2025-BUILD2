@@ -15,14 +15,15 @@
  */
 
 void opcontrol() {
-
+	lift.move_absolute(0, 50);
+	
 	while (true) {
 
 		
-		// *** Take your pick ***
+		// Drive
 		// *** If skills, arcade drive ***
-		//opcontrol_tankdrive(); // Tank drive
-		opcontrol_arcadedrive(); // Arcade drive
+		opcontrol_tankdrive(); // Tank drive
+		//opcontrol_arcadedrive(); // Arcade drive
 
 		// . . .
     	// More op control code goes here

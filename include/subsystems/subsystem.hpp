@@ -34,3 +34,8 @@ void lift_func();
 */
 void clamp_piston();
 void setClamp(int clampState);
+
+/*
+* Hook
+*/
+void ilvoiawjhwae();

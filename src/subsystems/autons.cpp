@@ -12,18 +12,65 @@ A minimum of two stakes on the alliance’s side of the autonomous line with at 
 At least one robot contacting the middle.
 Has not broken any rules.
 */
+
+// Close Side Auton
 void closeSide(){
-    /*
-    close side:
-    1. out
-    2. clamp
-    3. release intake
-    4. spin
-    5. turn
-    6. drive fwd to get red ring
-    7. drop ?
-    8. touch side of middle
-    */
+    // 1. Go out
+    auton_drive(-600, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 2. Clamp
+    clamp_piston1.extend();
+    pros::delay(AUTON_DELAY_TIME);
+    // 3. Release intake
+    setLift(3);
+    pros::delay(AUTON_DELAY_TIME);
+    // 4. Spin
+    setIntake(110);
+    // 5. Turn
+    auton_turn(65, TURN_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 6. Drive fwd to get red ring
+    auton_drive(275, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 7. Turn all the way
+    auton_turn(170, TURN_SPEED-15);
+    pros::delay(AUTON_DELAY_TIME);
+    // 8. Drop the stake
+    clamp_piston1.retract();
+    pros::delay(AUTON_DELAY_TIME);
+    // 9. Drive FWD to side of middle, ride up
+    auton_drive(700, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+}
+
+// Close Side Auton (Mirrored)
+void closeSideMirrored(){
+    // 1. Go out
+    auton_drive(-600, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 2. Clamp
+    clamp_piston1.extend();
+    pros::delay(AUTON_DELAY_TIME);
+    // 3. Release intake
+    setLift(3);
+    pros::delay(AUTON_DELAY_TIME);
+    // 4. Spin
+    setIntake(110);
+    // 5. Turn
+    auton_turn(-65, TURN_SPEED); // Mirrored
+    pros::delay(AUTON_DELAY_TIME);
+    // 6. Drive fwd to get red ring
+    auton_drive(275, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 7. Turn all the way
+    auton_turn(-170, TURN_SPEED-15);
+    pros::delay(AUTON_DELAY_TIME);
+    // 8. Drop the stake
+    clamp_piston1.retract();
+    pros::delay(AUTON_DELAY_TIME);
+    // 9. Drive FWD to side of middle, ride up
+    auton_drive(700, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
 }
 
 // Far Side Auton
@@ -46,7 +93,7 @@ void farSide(){
     auton_drive(275, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 7. Turn all the way
-    auton_turn(-160, TURN_SPEED);
+    auton_turn(-150, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 8. Drop the stake
     clamp_piston1.retract();
@@ -56,7 +103,40 @@ void farSide(){
     pros::delay(AUTON_DELAY_TIME);
 }
 
+// Far Side Auton (Mirrored)
+void farSideMirrored(){
+    // 1. Go out
+    auton_drive(-600, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 2. Clamp
+    clamp_piston1.extend();
+    pros::delay(AUTON_DELAY_TIME);
+    // 3. Release intake
+    setLift(3);
+    pros::delay(AUTON_DELAY_TIME);
+    // 4. Spin
+    setIntake(110);
+    // 5. Turn
+    auton_turn(60, TURN_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 6. Drive fwd to get red ring
+    auton_drive(275, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 7. Turn all the way
+    auton_turn(150, TURN_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+    // 8. Drop the stake
+    clamp_piston1.retract();
+    pros::delay(AUTON_DELAY_TIME);
+    // 9. Drive FWD to side of middle, ride up
+    auton_drive(700, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+}
+
+
+
+// Auton Skills
 void autonSkills(){
-
-
+    // 1.
+    // 2.
 }

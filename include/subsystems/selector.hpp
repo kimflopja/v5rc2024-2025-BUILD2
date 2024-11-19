@@ -6,9 +6,6 @@
 
 #include "api.h"
 
-extern int autonChosen;
-extern int skillsOrHTH;
-
 /*
 *
 * ///////////////// Selector Functions ///////////////// 
@@ -17,5 +14,4 @@ extern int skillsOrHTH;
 
 
 
-void autonSelector();
-
+int autonSelector();

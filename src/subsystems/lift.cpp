@@ -20,10 +20,10 @@ void setLift(int liftState){
     case 1: // Release intake
       lift.move_absolute(150, 50); 
       break;
-    case 2: // Height of short stake
+    case 2: // Hang level
       lift.move_absolute(300, 50); 
       break;
-    case 3: // Height of tallest stake
+    case 3: // Top for hang
       lift.move_absolute(400, 50); 
       break;
   }

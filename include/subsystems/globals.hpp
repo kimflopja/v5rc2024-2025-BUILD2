@@ -37,7 +37,9 @@ extern pros::Motor intake;
 */
 
 
-extern pros::adi::Pneumatics clamp_piston1;  
+extern pros::adi::Pneumatics clamp_piston1;  // Clamp piston
+extern pros::adi::Pneumatics hookADI;  // Hook
+
 
 
 /*
@@ -50,3 +52,6 @@ extern pros::adi::Pneumatics clamp_piston1;
 /*
 * Misc, for values and such
 */
+
+extern int autonChosen;
+extern int autonSel;
