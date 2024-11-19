@@ -1,3 +1,1 @@
-# V5RC High Stakes Code
-*** Written by Tal ***
-
+# V5RC High Stakes Code Team 48700X
