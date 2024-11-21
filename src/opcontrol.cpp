@@ -22,8 +22,8 @@ void opcontrol() {
 		
 		// Drive
 		// *** If skills, arcade drive ***
-		opcontrol_tankdrive(); // Tank drive
-		//opcontrol_arcadedrive(); // Arcade drive
+		//opcontrol_tankdrive(); // Tank drive
+		opcontrol_arcadedrive(); // Arcade drive
 
 		// . . .
     	// More op control code goes here
@@ -33,6 +33,8 @@ void opcontrol() {
 		lift_func();
 		// Intake
 		intake_func();
+		// Hook
+		hook_piston_func();
     	// . . .
 
 		// Delay 

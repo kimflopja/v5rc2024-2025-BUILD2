@@ -40,6 +40,7 @@ pros::Motor lift(-16, pros::v5::MotorGears::red, pros::v5::MotorUnits::degrees);
 // Pneumatics
 // Solenoid: h
 pros::adi::Pneumatics clamp_piston1('h', false);   
+pros::adi::Pneumatics hook_piston1('g', false);   
 
 /*
 * Misc, for values and such

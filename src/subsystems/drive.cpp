@@ -91,7 +91,7 @@ void opcontrol_tankdrive(){
 void opcontrol_arcadedrive(){
     // *** LEFT joystick ***
     int x = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
-    int y = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    int y = controller_master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
     //Extra precision
     setArcadeDrive((x*abs(x))/100, (y*abs(y))/100);
 }
@@ -167,7 +167,7 @@ void resetPID(){
 
 
 /*
-* Drive with PID output
+* Drive
 */
 void auton_drive(int goal, int speed){
     // Get direction

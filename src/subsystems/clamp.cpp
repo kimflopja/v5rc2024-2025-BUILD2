@@ -2,10 +2,10 @@
 
 
 void clamp_piston(){
-    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-      clamp_piston1.extend();
-    }
-    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
       clamp_piston1.retract();
+    }
+    if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      clamp_piston1.extend();
     }
 }

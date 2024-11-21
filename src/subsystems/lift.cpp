@@ -7,8 +7,8 @@
 // if up button pressed -> up a level
 // if down button pressed -> down a level
 
-bool buttonUpRegistered = false;
-bool buttonDownRegistered = false;
+bool buttonL2Registered = false;
+bool buttonL1Registered = false;
 int liftState = 0;
 
 void setLift(int liftState){
@@ -24,24 +24,23 @@ void setLift(int liftState){
       lift.move_absolute(300, 50); 
       break;
     case 3: // Top for hang
-      lift.move_absolute(400, 50); 
+      lift.move_absolute(700, 50); 
       break;
   }
 }
 
 void lift_func(){     
-  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && !buttonUpRegistered) {
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && !buttonL2Registered) {
     if(liftState < 3) liftState ++;
     else liftState = 3;
-    
-    buttonUpRegistered = true;
-  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) buttonUpRegistered = false;
+    buttonL2Registered = true;
+  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) buttonL2Registered = false;
 
-  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && !buttonDownRegistered) {
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && !buttonL1Registered) {
     if(liftState > 0) liftState --;
     else liftState = 0;
-    buttonDownRegistered = true;
-  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) buttonDownRegistered = false;
+    buttonL1Registered = true;
+  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) buttonL1Registered = false;
 
   setLift(liftState);
   pros::delay(50); // Delay
