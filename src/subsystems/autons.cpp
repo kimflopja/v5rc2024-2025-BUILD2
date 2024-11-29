@@ -5,6 +5,17 @@ const int DRIVE_SPEED = 50;
 const int TURN_SPEED = 60;
 const int AUTON_DELAY_TIME = 500;
 
+// Distance = diameter * gearRatio * rotations
+// Diameter =
+// Gear ratio = 5:3
+// Rotations
+void driveTest(){
+    // drivePID(units, degrees)
+    // Swing is drive + turn at the same time
+    drivePID(50, 0);
+    pros::delay(AUTON_DELAY_TIME);
+}
+
 /*
 Both autons similar.
 At least 3 rings scored of the alliance color on a minimum of two stakes.
@@ -142,18 +153,18 @@ void autonSkills(){
     auton_drive(-100, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // Release intake
-    lift.move_absolute(700, 50);
+    setLift(3);
     pros::delay(AUTON_DELAY_TIME);
     // 3. Clamp
     clamp_piston1.extend();
     pros::delay(AUTON_DELAY_TIME);
     // 4. Rotate 180
-    auton_turn(-150, TURN_SPEED);
+    auton_turn(-155, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     setIntake(110); // Turn on intake
     pros::delay(AUTON_DELAY_TIME);
     // 5. Drive fwd to intake
-    auton_drive(300, DRIVE_SPEED);
+    auton_drive(350, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 6. Rotate 90 degrees to the right
     auton_turn(90, TURN_SPEED);
@@ -178,21 +189,27 @@ void autonSkills(){
     auton_drive(-150, DRIVE_SPEED); // Drive backward
     pros::delay(AUTON_DELAY_TIME);
     // 10. Turn
-    auton_turn(230, TURN_SPEED); // Turn to be bkwd
+    auton_turn(220, TURN_SPEED); // Turn to be bkwd
     pros::delay(AUTON_DELAY_TIME);
     // Drive bkwd
-    auton_drive(-200, DRIVE_SPEED); // Drive backward
+    auton_drive(-350, DRIVE_SPEED); // Drive backward
     pros::delay(AUTON_DELAY_TIME);
     // 11. Unclamp
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
     // 12. Drive fwd
-    auton_drive(350, DRIVE_SPEED);
+    auton_drive(800, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    // 13. Turn
-    auton_turn(90, TURN_SPEED); // Turn to be bkwd
+    // Hang
+    setLift(0);
     pros::delay(AUTON_DELAY_TIME);
-    // 14. Drive bkwd to clamp
+    hook_piston1.extend();
+    hook_piston1.retract();
+    /* 
+    // 13. Turn (NEXT STAKE)
+    auton_turn(120, TURN_SPEED); // Turn to be bkwd
+    pros::delay(AUTON_DELAY_TIME);
+    // 14. Drive bkwd to clamp new stake
     auton_drive(-800, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 15. Turn to intake
@@ -219,4 +236,5 @@ void autonSkills(){
     // 28. Drive fwd
     // 29. Bring arm down to hang
     // 30. Bring hook down (lock it)
+    */
 }

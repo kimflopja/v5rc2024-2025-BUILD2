@@ -1,13 +1,30 @@
 #include "main.h"
 
+double output = 0.0; // PID Output
+double error = 0.0; // Error, Or rather PROPORTIONAL :3
+double prev_error = 0.0; // Previous Error
+double integral = 0.0; // Integral term
+double derivative = 0.0; // Derivative Term
+
+// Turn
+double turnOutput = 0.0;
+double turnDifference = 0.0;
+double turnError = 0.0; // Error, Or rather PROPORTIONAL :3
+double turnPrevError = 0.0; // Previous Error
+double turnIntegral = 0.0; // Integral term
+double turnDerivative = 0.0; // Derivative Term
+
+double helpful_range = 1000;
+
+double kP = 1.0;
+double kI = 1.0;
+double kD = 1.0;
 
 /*
 *
 * ///////////////// Movement Functions :3 ///////////////// 
 * 
 */
-
-PID chassis;
 
 /*
 * Set the motors to a value
@@ -22,6 +39,15 @@ void setDrive(int leftMove, int rightMove){
     right_motor3.move(rightMove);
 }
 
+void setDriveVoltage(int leftMoveVoltage, int rightMoveVoltage){
+    left_motor1.move_voltage(leftMoveVoltage);
+    left_motor2.move_voltage(leftMoveVoltage);
+    left_motor3.move_voltage(leftMoveVoltage);
+
+    right_motor1.move_voltage(rightMoveVoltage);
+    right_motor2.move_voltage(rightMoveVoltage);
+    right_motor3.move_voltage(rightMoveVoltage);
+}
 
 
 /*
@@ -161,8 +187,29 @@ double getRightPosition(){
 * Reset PID values
 */
 void resetPID(){
-    chassis.reset_PID();
+    // chassis.reset_PID();
+    double output = 0.0; // PID Output
+    double error = 0.0; // Error, Or rather PROPORTIONAL :3
+    double prev_error = 0.0; // Previous Error
+    double integral = 0.0; // Integral term
+    double derivative = 0.0; // Derivative Term
+
+    // Turn
+    double turnOutput = 0.0;
+    double turnDifference = 0.0;
+    double turnError = 0.0; // Error, Or rather PROPORTIONAL :3
+    double turnPrevError = 0.0; // Previous Error
+    double turnIntegral = 0.0; // Integral term
+    double turnDerivative = 0.0; // Derivative Term
 }
+
+
+
+/*
+*
+* ///////////////// Auton Drive Functions :3 ///////////////// 
+* 
+*/
 
 
 
@@ -176,7 +223,7 @@ void auton_drive(int goal, int speed){
     resetDriveEncoders();
     // Drive until goal is reached
     while(fabs(avgDriveEncoderValue()) < abs(goal)){
-        setDrive(speed*direction, speed*direction); // Self correcting driving ?
+        setDrive(speed*direction - inertial.get_rotation(), speed*direction + inertial.get_rotation()); // Self correcting driving ?
         pros::delay(10);
     }
     // Let it settle
@@ -200,7 +247,6 @@ void auton_turn(int degrees, int speed){
     // Reset inertial
     inertial.set_rotation(0);
     // Turn until degrees is reached
-    pros::lcd::print(2, "rotation: %f", inertial.get_rotation()); // Troubleshooting
     while(fabs(inertial.get_rotation()) < abs(degrees)){ 
         setDrive(-speed*direction, speed*direction);
         pros::delay(10);
@@ -229,3 +275,106 @@ void auton_turn(int degrees, int speed){
 }
 
 
+void auton_swing(int degrees, int units, int speed){
+    // Get direction
+    int direction = abs(degrees) / degrees;
+    // Reset inertial
+    inertial.set_rotation(0);
+    // Turn until degrees is reached
+    while(fabs(inertial.get_rotation()) < abs(degrees)){ 
+        setDrive(-speed*direction, speed*direction);
+        pros::delay(10);
+    }
+    while(fabs(avgDriveEncoderValue()) < abs(units)){
+        setDrive(speed*direction - inertial.get_rotation(), speed*direction + inertial.get_rotation()); // Self correcting driving ?
+        pros::delay(10);
+    }
+    // Wait to let the robot settle
+    pros::delay(100);
+    // Self correct here
+    if(fabs(inertial.get_rotation()) > abs(degrees)){
+        while(fabs(inertial.get_rotation()) > abs(degrees)){ 
+        setDrive(0.50 * speed * direction, 0.50 * -speed * direction); // Speed is lessened to slow it
+        pros::delay(10);
+        }
+    }
+    else if(fabs(inertial.get_rotation()) < abs(degrees)){
+        while(fabs(inertial.get_rotation()) < abs(degrees)){ 
+        setDrive(0.50 * -speed * direction, 0.50 * speed*direction);
+        pros::delay(10);
+        }
+    }
+    
+    
+    // Stop
+    setDrive(0,0);
+}
+
+
+
+/*
+*
+* ///////////////// PID Drive Functions ///////////////// 
+* 
+*/
+
+
+
+/*
+* PID drive algorithm
+*/
+void drivePID(int units, int degrees){
+
+    // Sensor value
+    int averagePosition = avgDriveEncoderValue();
+
+    // Error
+    error = averagePosition - units;
+
+    // Integral
+    integral += error;
+    if (error > helpful_range){
+            integral = 0;
+        } else if (error = 0){
+            integral = 0;
+        }
+
+
+    // Derivative
+    derivative = error - prev_error;
+
+    prev_error = error; // Update prev_error
+
+    // TURN DIFFERENCE
+    //turnDifference = getLeftPosition() - getRightPosition();
+    turnDifference = fabs(inertial.get_rotation());
+    // Turn error
+    turnError = turnDifference - degrees;
+
+    // Turn integral
+    turnIntegral += turnError;
+
+    // Turn Derivative
+    turnDerivative = turnError - turnPrevError;
+    if (turnError > helpful_range){
+            integral = 0;
+        } else if (error = 0){
+            integral = 0;
+        }
+
+    // Update prev error
+    turnPrevError = error;
+
+    // PID output
+    // Using voltage because velocity has its own internal calculations
+    double lateralMotion = (error * kP + integral * kI + derivative * kD)/12.0; 
+
+    // Turn PID output
+    double rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD)/12.0;
+
+    // Drive
+    setDriveVoltage(lateralMotion + rotationalMotion, lateralMotion - rotationalMotion); 
+    
+    // Delay
+    pros::delay(util::DELAY_TIME);
+}

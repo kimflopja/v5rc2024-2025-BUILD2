@@ -7,3 +7,4 @@ void closeSideMirrored();
 void farSide();
 void farSideMirrored();
 void autonSkills();
+void driveTest();

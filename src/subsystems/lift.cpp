@@ -29,18 +29,36 @@ void setLift(int liftState){
   }
 }
 
-void lift_func(){     
-  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && !buttonL2Registered) {
+void lift_funcL1(){
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && !buttonL2Registered) { // Up
     if(liftState < 3) liftState ++;
     else liftState = 3;
     buttonL2Registered = true;
   } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) buttonL2Registered = false;
 
-  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && !buttonL1Registered) {
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1) && !buttonL1Registered) { // Down
     if(liftState > 0) liftState --;
     else liftState = 0;
     buttonL1Registered = true;
   } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) buttonL1Registered = false;
+
+  setLift(liftState);
+  pros::delay(50); // Delay
+} 
+
+
+void lift_funcArrows(){
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP) && !buttonL2Registered) { // Up
+    if(liftState < 3) liftState ++;
+    else liftState = 3;
+    buttonL2Registered = true;
+  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) buttonL2Registered = false;
+
+  if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN) && !buttonL1Registered) { // Down
+    if(liftState > 0) liftState --;
+    else liftState = 0;
+    buttonL1Registered = true;
+  } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) buttonL1Registered = false;
 
   setLift(liftState);
   pros::delay(50); // Delay

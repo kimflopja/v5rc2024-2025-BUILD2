@@ -15,15 +15,19 @@ int autonSel;
 void competition_initialize() {
 	/// ...
 	int autonSel = autonSelector();
+	while (true) {
+		 pros::lcd::print(2, "State: %d", autonSel);
+	}
 }
 
-/**
+/*
 * Autonomous
 */
 void autonomous() {
 	inertial.tare(); // Set inertial values to 0
 	resetDriveEncoders();// Reset drive sensors to 0
-	int autonSel = 4;
+	resetPID();
+	int autonSel = 5;
 	switch (autonSel)
   	{
 		case 0: // Far Side
@@ -40,6 +44,9 @@ void autonomous() {
 			break;
 		case 4: // Skills
 			autonSkills();
+			break;
+		case 5:// test
+			driveTest();
 			break;
   	}
 }

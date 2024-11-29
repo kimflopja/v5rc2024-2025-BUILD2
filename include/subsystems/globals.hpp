@@ -39,6 +39,9 @@ extern pros::Motor intake;
 
 extern pros::adi::Pneumatics clamp_piston1;  // Clamp piston
 extern pros::adi::Pneumatics hook_piston1; // Hook
+// Swithc
+extern pros::adi::Pneumatics switchBlade1;
+extern pros::adi::Pneumatics switchBlade2;
 
 
 

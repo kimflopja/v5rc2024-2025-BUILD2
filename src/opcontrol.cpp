@@ -16,25 +16,29 @@
 
 void opcontrol() {
 	lift.move_absolute(0, 50);
-	
+	setLift(0);
 	while (true) {
 
 		
 		// Drive
 		// *** If skills, arcade drive ***
-		//opcontrol_tankdrive(); // Tank drive
-		opcontrol_arcadedrive(); // Arcade drive
+		opcontrol_tankdrive(); // Tank drive
+		//opcontrol_arcadedrive(); // Arcade drive
 
 		// . . .
     	// More op control code goes here
 		// Clamp
-		clamp_piston();
+		clamp_piston(); // Skills
+		//clamp_pistonL1(); // HTH
 		// Lift
-		lift_func();
+		lift_funcL1(); // Skills
+		//lift_funcArrows(); // HTH
 		// Intake
 		intake_func();
 		// Hook
 		hook_piston_func();
+		// Switchblade
+		clear_arm();
     	// . . .
 
 		// Delay 

@@ -26,15 +26,24 @@ void setIntake(int power);
 * Lift
 */
 void setLift(int liftState);
-void lift_func();
+void lift_funcL1();
+void lift_funcArrows();
 
 
 /*
 * Clamp
 */
 void clamp_piston();
+void clamp_pistonL1();
 
 /*
 * Hook
 */
 void hook_piston_func();
+
+/*
+* Ring clear arm
+*/
+void clear_arm();
+void setClearArm();
+

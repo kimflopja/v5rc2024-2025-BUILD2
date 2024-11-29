@@ -6,6 +6,8 @@
 
 #include "api.h"
 
+# if 0
+
 /*
 * A class implementing PID
 */
@@ -121,3 +123,5 @@ class PID{
 
 };
 
+
+#endif

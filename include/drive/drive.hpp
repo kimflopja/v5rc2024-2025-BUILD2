@@ -31,6 +31,11 @@ void setDrive(int leftJoystick, int rightJoystick);
 void setArcadeDrive(int rotate, int drive);
 
 /*
+* Set the motors to a value (VOLTAGE)
+*/
+void setDriveVoltage(int leftMoveVoltage, int rightMoveVoltage);
+
+/*
 * Tank drive
 */
 void opcontrol_tankdrive();
@@ -59,6 +64,19 @@ void auton_drive(int goal, int speed);
 * Drive turn
 */
 void auton_turn(int degrees, int speed);
+
+
+/*
+* Drive swing
+*/
+void auton_swing(int degrees, int units, int speed);
+
+/*
+* Drive PID algo
+*/
+void drivePID(int units, int speed);
+
+
 
 
 

@@ -19,7 +19,6 @@ int autonSelector(){
         buttonRightRegistered = true;
     } else if(!controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) buttonRightRegistered = false;
 
-    pros::lcd::print(2, "State: %d", autonState);
     pros::lcd::print(3, "0 - Far Side");
     pros::lcd::print(4, "1 - Close Side");
     pros::lcd::print(5, "2 - Far Side Mirrored");
