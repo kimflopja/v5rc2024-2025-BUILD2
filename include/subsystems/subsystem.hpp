@@ -45,5 +45,9 @@ void hook_piston_func();
 * Ring clear arm
 */
 void clear_arm();
-void setClearArm();
+void setClearArm(int armState);
 
+/*
+* Ring clear arm
+*/
+void setUpStart();

@@ -16,17 +16,18 @@
 
 void opcontrol() {
 	lift.move_absolute(0, 50);
-	setLift(0);
+	setUpStart(); // Sets lift state to 1, releases intake
 	while (true) {
 
 		
 		// Drive
 		// *** If skills, arcade drive ***
-		opcontrol_tankdrive(); // Tank drive
-		//opcontrol_arcadedrive(); // Arcade drive
+		//opcontrol_tankdrive(); // Tank drive
+		opcontrol_arcadedrive(); // Arcade drive
 
 		// . . .
     	// More op control code goes here
+		// Set up
 		// Clamp
 		clamp_piston(); // Skills
 		//clamp_pistonL1(); // HTH

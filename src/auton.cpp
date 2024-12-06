@@ -27,7 +27,8 @@ void autonomous() {
 	inertial.tare(); // Set inertial values to 0
 	resetDriveEncoders();// Reset drive sensors to 0
 	resetPID();
-	int autonSel = 5;
+	setUpStart();
+	int autonSel = 4;
 	switch (autonSel)
   	{
 		case 0: // Far Side
@@ -43,7 +44,7 @@ void autonomous() {
 			closeSideMirrored();
 			break;
 		case 4: // Skills
-			autonSkills();
+			autonSkills2();
 			break;
 		case 5:// test
 			driveTest();

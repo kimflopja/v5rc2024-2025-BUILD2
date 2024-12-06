@@ -1,8 +1,7 @@
 #include "main.h"
 
 bool buttonRegistered = false;
-bool oneActivated = false;
-int armState = 0;
+int armState = 2;
 
 //when one is down, the other is opposite
 // even number
@@ -17,12 +16,12 @@ void setClearArm(int armState){
             switchBlade1.retract();
             switchBlade2.extend();
             break;
-        case 1: // intake off
+        case 1: // intake off, arm out
             switchBlade1.extend();
             switchBlade2.extend();
             setIntake(0);
             break;
-        case 2: // intake on
+        case 2: // intake on, arm in
             switchBlade1.retract();
             switchBlade2.retract();
             break;

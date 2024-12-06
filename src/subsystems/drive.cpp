@@ -221,6 +221,8 @@ void auton_drive(int goal, int speed){
     int direction = abs(goal)/goal;
     // Reset
     resetDriveEncoders();
+    // Reset inertial
+    inertial.set_rotation(0);
     // Drive until goal is reached
     while(fabs(avgDriveEncoderValue()) < abs(goal)){
         setDrive(speed*direction - inertial.get_rotation(), speed*direction + inertial.get_rotation()); // Self correcting driving ?
@@ -367,10 +369,10 @@ void drivePID(int units, int degrees){
 
     // PID output
     // Using voltage because velocity has its own internal calculations
-    double lateralMotion = (error * kP + integral * kI + derivative * kD)/12.0; 
+    double lateralMotion = (error * kP + integral * kI + derivative * kD); 
 
     // Turn PID output
-    double rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD)/12.0;
+    double rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD);
 
     // Drive
     setDriveVoltage(lateralMotion + rotationalMotion, lateralMotion - rotationalMotion); 

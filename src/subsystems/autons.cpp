@@ -1,18 +1,20 @@
 #include "main.h"
 
 // Out of 127
-const int DRIVE_SPEED = 50;
+const int DRIVE_SPEED = 80;
 const int TURN_SPEED = 60;
-const int AUTON_DELAY_TIME = 500;
+const int AUTON_DELAY_TIME = 200;
 
 // Distance = diameter * gearRatio * rotations
 // Diameter =
 // Gear ratio = 5:3
 // Rotations
 void driveTest(){
+    resetDriveEncoders();
+    inertial.tare();
     // drivePID(units, degrees)
     // Swing is drive + turn at the same time
-    drivePID(50, 0);
+    drivePID(300, 0);
     pros::delay(AUTON_DELAY_TIME);
 }
 
@@ -200,11 +202,6 @@ void autonSkills(){
     // 12. Drive fwd
     auton_drive(800, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    // Hang
-    setLift(0);
-    pros::delay(AUTON_DELAY_TIME);
-    hook_piston1.extend();
-    hook_piston1.retract();
     /* 
     // 13. Turn (NEXT STAKE)
     auton_turn(120, TURN_SPEED); // Turn to be bkwd
@@ -237,4 +234,52 @@ void autonSkills(){
     // 29. Bring arm down to hang
     // 30. Bring hook down (lock it)
     */
+}
+
+// Auton Skills #2
+void autonSkills2(){
+    setUpStart();
+    // Drive bkwd
+    auton_drive(-10, DRIVE_SPEED);
+    pros::delay(AUTON_DELAY_TIME);
+   // 1. Rotate
+   auton_turn(90, TURN_SPEED);
+   pros::delay(AUTON_DELAY_TIME);
+   // 2. Drive bkwd
+   auton_drive(-140, DRIVE_SPEED);
+   pros::delay(AUTON_DELAY_TIME);
+   // 3. Grab stake
+   clamp_piston1.extend();
+   pros::delay(AUTON_DELAY_TIME);
+   // 4. Turn intake on
+   setIntake(100);
+   // 5. Turn towards ring
+   auton_turn(140, TURN_SPEED);
+   // 6. Drive fwd
+   auton_drive(450, DRIVE_SPEED);
+   // 7. Turn again
+   auton_turn(-15, TURN_SPEED);
+   // 8. Drive fwd
+   auton_drive(300, DRIVE_SPEED);
+   // 9. Turn all the way
+   auton_turn(150, TURN_SPEED);
+   // 9. Drive fwd
+   auton_drive(500, DRIVE_SPEED);
+   // 10. Turn to the other ring
+   // auton_turn(-90, TURN_SPEED);
+   // 11. Drive fwd again
+   // auton_drive(200, DRIVE_SPEED);
+   // 12. Turn so it can go in the corner
+   // auton_turn(90, TURN_SPEED);
+   // 13. Drive fwd
+   // auton_drive(200, DRIVE_SPEED);
+   // 14. Turn
+   // auton_turn(90, TURN_SPEED);
+   // 15. Drive bkwd 
+   // auton_drive(-150, DRIVE_SPEED);
+   // 16. Drop stake
+   // clamp_piston1.retract();
+   // 17. Drive fwd
+   // 18. Turn
+   // 19. Grab stake on other side
 }
