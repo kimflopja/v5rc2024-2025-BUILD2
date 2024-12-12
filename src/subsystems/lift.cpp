@@ -7,9 +7,17 @@
 // if up button pressed -> up a level
 // if down button pressed -> down a level
 
+/**
+* preferably don't touch these
+*/
 bool buttonL2Registered = false;
 bool buttonL1Registered = false;
 int liftState = 0;
+
+/**
+* Set the lift state with this function.
+* If the HANG is not high enough, change CASE 3's LIFT.MOVE_ABSOLUTE's FIRST value. The SECOND value is the SPEED of the lift.
+*/
 
 void setLift(int liftState){
   switch (liftState)
@@ -29,6 +37,9 @@ void setLift(int liftState){
   }
 }
 
+/**
+* preferably don't touch these
+*/
 void lift_funcL1(){
   if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2) && !buttonL2Registered) { // Up
     if(liftState < 3) liftState ++;
