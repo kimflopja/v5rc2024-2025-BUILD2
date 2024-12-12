@@ -51,3 +51,7 @@ void setClearArm(int armState);
 * Ring clear arm
 */
 void setUpStart();
+
+// Skills or HTH
+void skillsOpControl();
+void HTHOpControl();

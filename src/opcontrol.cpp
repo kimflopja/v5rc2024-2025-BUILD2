@@ -14,27 +14,36 @@
  * task, not resume it from where it left off.
  */
 
+void skillsOpControl(){
+	// Arcade Drive
+	opcontrol_arcadedrive();
+	// L1/L2 Lift
+	lift_funcL1();
+	// Arrows Clamp
+	clamp_piston();
+}
+
+void HTHOpControl(){
+	// Tank Drive
+	opcontrol_tankdrive();
+	// Arrows Lift
+	lift_funcArrows();
+	// L1/L2 Clamp
+	clamp_pistonL1();
+}
+
 void opcontrol() {
 	lift.move_absolute(0, 50);
 	setUpStart(); // Sets lift state to 1, releases intake
 	while (true) {
 
 		
-		// Drive
-		// *** If skills, arcade drive ***
-		//opcontrol_tankdrive(); // Tank drive
-		opcontrol_arcadedrive(); // Arcade drive
+		// *** Skills or HTH ***
+		//skillsOpControl();
+		HTHOpControl();
 
 		// . . .
     	// More op control code goes here
-		// Set up
-		// Clamp
-		clamp_piston(); // Skills
-		//clamp_pistonL1(); // HTH
-		// Lift
-		lift_funcL1(); // Skills
-		//lift_funcArrows(); // HTH
-		// Intake
 		intake_func();
 		// Hook
 		hook_piston_func();

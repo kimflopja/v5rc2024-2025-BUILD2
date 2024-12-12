@@ -1,24 +1,6 @@
 #include "main.h"
 
-double output = 0.0; // PID Output
-double error = 0.0; // Error, Or rather PROPORTIONAL :3
-double prev_error = 0.0; // Previous Error
-double integral = 0.0; // Integral term
-double derivative = 0.0; // Derivative Term
 
-// Turn
-double turnOutput = 0.0;
-double turnDifference = 0.0;
-double turnError = 0.0; // Error, Or rather PROPORTIONAL :3
-double turnPrevError = 0.0; // Previous Error
-double turnIntegral = 0.0; // Integral term
-double turnDerivative = 0.0; // Derivative Term
-
-double helpful_range = 1000;
-
-double kP = 1.0;
-double kI = 1.0;
-double kD = 1.0;
 
 /*
 *
@@ -43,7 +25,7 @@ void setDriveVoltage(int leftMoveVoltage, int rightMoveVoltage){
     left_motor1.move_voltage(leftMoveVoltage);
     left_motor2.move_voltage(leftMoveVoltage);
     left_motor3.move_voltage(leftMoveVoltage);
-
+    
     right_motor1.move_voltage(rightMoveVoltage);
     right_motor2.move_voltage(rightMoveVoltage);
     right_motor3.move_voltage(rightMoveVoltage);
@@ -322,61 +304,3 @@ void auton_swing(int degrees, int units, int speed){
 
 
 
-/*
-* PID drive algorithm
-*/
-void drivePID(int units, int degrees){
-
-    // Sensor value
-    int averagePosition = avgDriveEncoderValue();
-
-    // Error
-    error = averagePosition - units;
-
-    // Integral
-    integral += error;
-    if (error > helpful_range){
-            integral = 0;
-        } else if (error = 0){
-            integral = 0;
-        }
-
-
-    // Derivative
-    derivative = error - prev_error;
-
-    prev_error = error; // Update prev_error
-
-    // TURN DIFFERENCE
-    //turnDifference = getLeftPosition() - getRightPosition();
-    turnDifference = fabs(inertial.get_rotation());
-    // Turn error
-    turnError = turnDifference - degrees;
-
-    // Turn integral
-    turnIntegral += turnError;
-
-    // Turn Derivative
-    turnDerivative = turnError - turnPrevError;
-    if (turnError > helpful_range){
-            integral = 0;
-        } else if (error = 0){
-            integral = 0;
-        }
-
-    // Update prev error
-    turnPrevError = error;
-
-    // PID output
-    // Using voltage because velocity has its own internal calculations
-    double lateralMotion = (error * kP + integral * kI + derivative * kD); 
-
-    // Turn PID output
-    double rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD);
-
-    // Drive
-    setDriveVoltage(lateralMotion + rotationalMotion, lateralMotion - rotationalMotion); 
-    
-    // Delay
-    pros::delay(util::DELAY_TIME);
-}

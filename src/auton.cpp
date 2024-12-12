@@ -28,7 +28,7 @@ void autonomous() {
 	resetDriveEncoders();// Reset drive sensors to 0
 	resetPID();
 	setUpStart();
-	int autonSel = 4;
+	int autonSel = 3;
 	switch (autonSel)
   	{
 		case 0: // Far Side
