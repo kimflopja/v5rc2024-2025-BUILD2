@@ -5,7 +5,9 @@ bool buttonLeftRegistered = false;
 bool buttonRightRegistered = false;
 int autonState = 0;
 
-// If LLEMU doesnt work, use the side buttons on controller to select
+/**
+* NOT IN USE OR IMPORTANT, IGNORE IT WHEN ITS ON THE BOT
+*/
 int autonSelector(){
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT) && !buttonLeftRegistered) {
         if(autonState < 3) autonState ++;

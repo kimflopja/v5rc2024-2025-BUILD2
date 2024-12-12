@@ -18,7 +18,6 @@ int liftState = 0;
 * Set the lift state with this function.
 * If the HANG is not high enough, change CASE 3's LIFT.MOVE_ABSOLUTE's FIRST value. The SECOND value is the SPEED of the lift.
 */
-
 void setLift(int liftState){
   switch (liftState)
   {

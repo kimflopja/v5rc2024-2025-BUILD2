@@ -3,13 +3,9 @@
 bool buttonRegistered = false;
 int armState = 2;
 
-//when one is down, the other is opposite
-// even number
-// arm comes down at the start
-// state -- first time its pressed it comes down
-// when even number, intake on
-// when odd number, shut off intake
-
+/**
+* The SWITCHBLADE.
+*/
 void setClearArm(int armState){
     switch (armState) {
         case 0: // initial press

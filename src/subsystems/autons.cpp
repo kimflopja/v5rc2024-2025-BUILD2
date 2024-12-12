@@ -1,5 +1,10 @@
 #include "main.h"
 
+/**
+* Where all the AUTONOMOUS RUNS are.
+* DONT touch drivePID or these variables below.
+*/
+
 int output = 0; // PID Output
 int error = 0; // Error, Or rather PROPORTIONAL :3
 int prev_error = 0; // Previous Error
@@ -78,10 +83,20 @@ void drivePID(int units, int degrees){
     pros::delay(util::DELAY_TIME);
 }
 
-// Out of 127
+/**
+* Constant values.
+* Can change if needed.
+* If the turn is too slow the robot won't turn.
+*/
 const int DRIVE_SPEED = 80;
 const int TURN_SPEED = 60;
 const int AUTON_DELAY_TIME = 200;
+
+/**
+* Below starts AUTON RUNS.
+* You can adjust these, but make sure the same changes are made to the MIRRORED version.
+* Make sure to add a DELAY between each movement.
+*/
 
 // Distance = diameter * gearRatio * rotations
 // Diameter =
@@ -226,6 +241,7 @@ void farSideMirrored(){
 
 
 // Auton Skills
+// NOT IN USE
 void autonSkills(){
     // 1. Start rotated
     // 2. Drive back
@@ -314,6 +330,7 @@ void autonSkills(){
 }
 
 // Auton Skills #2
+// THE ONE WE ARE USING
 void autonSkills2(){
     setUpStart();
     // Drive bkwd

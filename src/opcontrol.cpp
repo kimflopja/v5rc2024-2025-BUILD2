@@ -52,6 +52,7 @@ void opcontrol() {
 		/**
 		 * Skills or HTH
 		 * Comment out the one you are NOT using.
+		 * Then change the corresponding auton in auton.cpp.
 		 */
 
 		//skillsOpControl();

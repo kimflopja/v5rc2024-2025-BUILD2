@@ -1,5 +1,9 @@
 #include "main.h"
 
+/**
+* Where everything is defined.
+* To change a port, change the number value.
+*/
 
 /*
 * Controller

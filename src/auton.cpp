@@ -1,5 +1,7 @@
 #include "main.h"
 
+int autonSel;
+
 /**
  * Runs after initialize(), and before autonomous when connected to the Field
  * Management System or the VEX Competition Switch. This is intended for
@@ -10,8 +12,7 @@
  * starts.
  */
 
-int autonSel;
-
+//IGNORE
 void competition_initialize() {
 	/// ...
 	int autonSel = autonSelector();
@@ -20,8 +21,9 @@ void competition_initialize() {
 	}
 }
 
-/*
+/*** 
 * Autonomous
+* To pick one, change int autonSel. dont pick 5 it does nothing
 */
 void autonomous() {
 	inertial.tare(); // Set inertial values to 0

@@ -6,6 +6,10 @@
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
+/**
+* Initilization
+* The only thing you would need to change is the BRAKE MODE.
+*/
 void initialize() {
 	pros::lcd::initialize();
 	pros::lcd::print(1, "nightcord @25 is best");
