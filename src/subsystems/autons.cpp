@@ -140,9 +140,11 @@ void closeSide(){
     // 7. Turn all the way
     auton_turn(170, TURN_SPEED-15);
     pros::delay(AUTON_DELAY_TIME);
+    /*
     // 8. Drop the stake
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
+     */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -170,9 +172,11 @@ void closeSideMirrored(){
     // 7. Turn all the way
     auton_turn(-170, TURN_SPEED-15);
     pros::delay(AUTON_DELAY_TIME);
+    /*
     // 8. Drop the stake
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
+     */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -200,9 +204,11 @@ void farSide(){
     // 7. Turn all the way
     auton_turn(-150, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
+    /*
     // 8. Drop the stake
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
+    */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -230,9 +236,11 @@ void farSideMirrored(){
     // 7. Turn all the way
     auton_turn(150, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
+    /*
     // 8. Drop the stake
     clamp_piston1.retract();
     pros::delay(AUTON_DELAY_TIME);
+     */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
