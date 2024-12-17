@@ -124,7 +124,7 @@ void closeSide(){
     auton_drive(-600, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 2. Clamp
-    clamp_piston1.extend();
+    setClamp(clamp);
     pros::delay(AUTON_DELAY_TIME);
     // 3. Release intake
     setLift(3);
@@ -135,16 +135,11 @@ void closeSide(){
     auton_turn(65, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 6. Drive fwd to get red ring
-    auton_drive(275, DRIVE_SPEED);
+    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
     pros::delay(AUTON_DELAY_TIME);
     // 7. Turn all the way
     auton_turn(170, TURN_SPEED-15);
     pros::delay(AUTON_DELAY_TIME);
-    /*
-    // 8. Drop the stake
-    clamp_piston1.retract();
-    pros::delay(AUTON_DELAY_TIME);
-     */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -156,7 +151,7 @@ void closeSideMirrored(){
     auton_drive(-600, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 2. Clamp
-    clamp_piston1.extend();
+    setClamp(clamp);
     pros::delay(AUTON_DELAY_TIME);
     // 3. Release intake
     setLift(3);
@@ -167,16 +162,11 @@ void closeSideMirrored(){
     auton_turn(-65, TURN_SPEED); // Mirrored
     pros::delay(AUTON_DELAY_TIME);
     // 6. Drive fwd to get red ring
-    auton_drive(275, DRIVE_SPEED);
+    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
     pros::delay(AUTON_DELAY_TIME);
     // 7. Turn all the way
     auton_turn(-170, TURN_SPEED-15);
     pros::delay(AUTON_DELAY_TIME);
-    /*
-    // 8. Drop the stake
-    clamp_piston1.retract();
-    pros::delay(AUTON_DELAY_TIME);
-     */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -188,7 +178,7 @@ void farSide(){
     auton_drive(-600, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 2. Clamp
-    clamp_piston1.extend();
+    setClamp(clamp);
     pros::delay(AUTON_DELAY_TIME);
     // 3. Release intake
     setLift(3);
@@ -199,16 +189,11 @@ void farSide(){
     auton_turn(-60, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 6. Drive fwd to get red ring
-    auton_drive(275, DRIVE_SPEED);
+    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
     pros::delay(AUTON_DELAY_TIME);
     // 7. Turn all the way
     auton_turn(-150, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
-    /*
-    // 8. Drop the stake
-    clamp_piston1.retract();
-    pros::delay(AUTON_DELAY_TIME);
-    */
     // 9. Drive FWD to side of middle, ride up
     auton_drive(700, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
@@ -220,7 +205,7 @@ void farSideMirrored(){
     auton_drive(-600, DRIVE_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 2. Clamp
-    clamp_piston1.extend();
+    setClamp(clamp);
     pros::delay(AUTON_DELAY_TIME);
     // 3. Release intake
     setLift(3);
@@ -231,7 +216,7 @@ void farSideMirrored(){
     auton_turn(60, TURN_SPEED);
     pros::delay(AUTON_DELAY_TIME);
     // 6. Drive fwd to get red ring
-    auton_drive(275, DRIVE_SPEED);
+    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
     pros::delay(AUTON_DELAY_TIME);
     // 7. Turn all the way
     auton_turn(150, TURN_SPEED);
@@ -247,96 +232,6 @@ void farSideMirrored(){
 }
 
 
-
-// Auton Skills
-// NOT IN USE
-void autonSkills(){
-    // 1. Start rotated
-    // 2. Drive back
-    auton_drive(-100, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // Release intake
-    setLift(3);
-    pros::delay(AUTON_DELAY_TIME);
-    // 3. Clamp
-    clamp_piston1.extend();
-    pros::delay(AUTON_DELAY_TIME);
-    // 4. Rotate 180
-    auton_turn(-155, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    setIntake(110); // Turn on intake
-    pros::delay(AUTON_DELAY_TIME);
-    // 5. Drive fwd to intake
-    auton_drive(350, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 6. Rotate 90 degrees to the right
-    auton_turn(90, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 7. Drive fwd to intake
-    auton_drive(300, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 8. Rotate to face corner
-    auton_turn(90, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 9. Drive fwd to intake the rings there
-    auton_drive(250, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    auton_drive(100, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    auton_drive(-100, DRIVE_SPEED); // Go bkwd
-    pros::delay(AUTON_DELAY_TIME);
-    auton_turn(-90, TURN_SPEED); // Turn to get other rings
-    pros::delay(AUTON_DELAY_TIME);
-    auton_drive(150, DRIVE_SPEED); // Drive fwd to get it
-    pros::delay(AUTON_DELAY_TIME);
-    auton_drive(-150, DRIVE_SPEED); // Drive backward
-    pros::delay(AUTON_DELAY_TIME);
-    // 10. Turn
-    auton_turn(220, TURN_SPEED); // Turn to be bkwd
-    pros::delay(AUTON_DELAY_TIME);
-    // Drive bkwd
-    auton_drive(-350, DRIVE_SPEED); // Drive backward
-    pros::delay(AUTON_DELAY_TIME);
-    // 11. Unclamp in the corner
-    clamp_piston1.retract();
-    pros::delay(AUTON_DELAY_TIME);
-    // 12. Drive fwd
-    auton_drive(800, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    /* 
-    // 13. Turn (NEXT STAKE)
-    auton_turn(120, TURN_SPEED); // Turn to be bkwd
-    pros::delay(AUTON_DELAY_TIME);
-    // 14. Drive bkwd to clamp new stake
-    auton_drive(-800, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 15. Turn to intake
-    auton_turn(90, TURN_SPEED); 
-    pros::delay(AUTON_DELAY_TIME);
-    // 16. Drive fwd
-    auton_drive(200, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 17. Turn
-    auton_turn(90, TURN_SPEED); 
-    pros::delay(AUTON_DELAY_TIME);
-    // 18. Drive fwd to intake
-    auton_drive(300, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 19. Turn 
-    // 20. Drive fwd to get ring
-    // 21. Turn to get ring on right
-    // 22. Drive fwd
-    // 23. Turn to get other ring
-    // 24. Drive fwd
-    // 25. Turn to drop off clamp in corner
-    // 26. Drop off clamp
-    // 27. Turn towards middle ladder
-    // 28. Drive fwd
-    // 29. Bring arm down to hang
-    // 30. Bring hook down (lock it)
-    */
-}
-
 // Auton Skills #2
 // THE ONE WE ARE USING
 void autonSkills2(){
@@ -351,7 +246,7 @@ void autonSkills2(){
    auton_drive(-180, DRIVE_SPEED);
    pros::delay(AUTON_DELAY_TIME);
    // 3. Grab stake
-   clamp_piston1.extend();
+   setClamp(clamp);
    pros::delay(AUTON_DELAY_TIME);
    // Drive fwd slightly
    auton_drive(30, DRIVE_SPEED);
@@ -360,13 +255,13 @@ void autonSkills2(){
    setIntake(100);
    pros::delay(300);
    // 5. Turn towards ring
-   auton_turn(140, TURN_SPEED);
+   auton_turn(147, TURN_SPEED); // Changed angle to make it larger
    pros::delay(AUTON_DELAY_TIME);
    // 6. Drive fwd
    auton_drive(450, DRIVE_SPEED);
    pros::delay(AUTON_DELAY_TIME);
    // 7. Turn again
-   auton_turn(-15, TURN_SPEED);
+   auton_turn(-21, TURN_SPEED); //used to be -15, not good angle
    pros::delay(AUTON_DELAY_TIME);
    // 8. Drive fwd
    auton_drive(300, DRIVE_SPEED);
@@ -391,7 +286,7 @@ void autonSkills2(){
    auton_drive(-130, DRIVE_SPEED);
    pros::delay(AUTON_DELAY_TIME);
    // 12. Drop stake
-   clamp_piston1.retract();
+   setClamp(unclamp);
    pros::delay(AUTON_DELAY_TIME);
    // hang
    setLift(3);
@@ -402,7 +297,7 @@ void autonSkills2(){
    pros::delay(AUTON_DELAY_TIME);
    setLift(0);
    pros::delay(5000);
-   hook_piston1.extend();
+   setLatch(retracted);
    /* 
    // 13. Drive fwd
    auton_drive(100, DRIVE_SPEED);

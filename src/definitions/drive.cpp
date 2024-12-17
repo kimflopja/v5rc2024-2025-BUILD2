@@ -169,7 +169,6 @@ double getRightPosition(){
 * Reset PID values
 */
 void resetPID(){
-    // chassis.reset_PID();
     double output = 0.0; // PID Output
     double error = 0.0; // Error, Or rather PROPORTIONAL :3
     double prev_error = 0.0; // Previous Error

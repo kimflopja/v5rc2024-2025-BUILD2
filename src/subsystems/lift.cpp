@@ -12,6 +12,7 @@
 */
 bool buttonL2Registered = false;
 bool buttonL1Registered = false;
+const int LIFT_SPEED = 80;
 int liftState = 0;
 
 /**
@@ -22,16 +23,16 @@ void setLift(int liftState){
   switch (liftState)
   {
     case 0: // Set in startup
-      lift.move_absolute(0, 50); 
+      lift.move_absolute(0, LIFT_SPEED); 
       break;
-    case 1: // Release intake
-      lift.move_absolute(150, 50); 
+    case 1: // Wall stake
+      lift.move_absolute(150, LIFT_SPEED); 
       break;
-    case 2: // Hang level
-      lift.move_absolute(300, 50); 
+    case 2: // High stake
+      lift.move_absolute(300, LIFT_SPEED); 
       break;
-    case 3: // Top for hang
-      lift.move_absolute(700, 50); 
+    case 3: // Hang level
+      lift.move_absolute(700, LIFT_SPEED); 
       break;
   }
 }

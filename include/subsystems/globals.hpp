@@ -37,8 +37,8 @@ extern pros::Motor intake;
 */
 
 
-extern pros::adi::Pneumatics clamp_piston1;  // Clamp piston
-extern pros::adi::Pneumatics hook_piston1; // Hook
+extern pros::adi::Pneumatics clamp_piston;  // Clamp piston
+extern pros::adi::Pneumatics latch_piston; // Latch
 // Swithc
 extern pros::adi::Pneumatics switchBlade1;
 extern pros::adi::Pneumatics switchBlade2;
@@ -53,8 +53,20 @@ extern pros::adi::Pneumatics switchBlade2;
 
 
 /*
-* Misc, for values and such
+* Misc, for enums and such
 */
 
 extern int autonChosen;
 extern int autonSel;
+
+// Enum for the latch
+enum Latch{
+  extended,
+  retracted,
+};
+
+// Enum for the clamp
+enum Clamp {
+  unclamp,
+  clamp,
+};

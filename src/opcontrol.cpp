@@ -10,7 +10,7 @@ void skillsOpControl(){
 	// L1/L2 Lift
 	lift_funcL1();
 	// Arrows Clamp
-	clamp_piston();
+	clamp_pistonArrows();
 }
 
 /**
@@ -43,9 +43,8 @@ void HTHOpControl(){
 
 
 void opcontrol() {
-	lift.move_absolute(0, 50); // Makes sure the lift is at ZERO, so the hang works PROPERLY.
 	// If there is a problem with the LIFT, go to LIFT.CPP and change the values.
-	setUpStart(); // Releases intake.
+	setUpStart(); // Releases switchblade.
 	while (true) {
 
 		
@@ -61,8 +60,8 @@ void opcontrol() {
 		// . . .
     	// More op control code goes here
 		intake_func();
-		// Hook
-		hook_piston_func();
+		// Latch
+		latch_func();
 		// Switchblade
 		clear_arm();
     	// . . .

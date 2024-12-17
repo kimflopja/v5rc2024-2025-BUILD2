@@ -33,13 +33,15 @@ void lift_funcArrows();
 /*
 * Clamp
 */
-void clamp_piston();
+void setClamp(Clamp clampState);
+void clamp_pistonArrows();
 void clamp_pistonL1();
 
 /*
-* Hook
+* Latch
 */
-void hook_piston_func();
+void latch_func();
+void setLatch(Latch latchState);
 
 /*
 * Ring clear arm

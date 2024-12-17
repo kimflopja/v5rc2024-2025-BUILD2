@@ -4,22 +4,36 @@
 * The CLAMP.
 */
 
+
+
+// Set clamp
+void setClamp(Clamp clampState){
+  switch(clampState){
+    case unclamp:
+      clamp_piston.retract(); // Unclamp
+      break;
+    case clamp:
+      clamp_piston.extend() ; // Clamp
+      break;
+  }
+}
+
 // Uses ARROWS
-void clamp_piston(){
+void clamp_pistonArrows(){
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) { //Unclamp
-      clamp_piston1.retract();
+      setClamp(unclamp);
     }
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) { //Clamp
-      clamp_piston1.extend();
+      setClamp(clamp);
     }
 }
 
 // Uses L1/L2
 void clamp_pistonL1(){
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) { //Unclamp
-      clamp_piston1.retract();
+      setClamp(unclamp);
     }
     if(controller_master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) { //Clamp
-      clamp_piston1.extend();
+      setClamp(clamp);
     }
 }

@@ -43,9 +43,9 @@ pros::Motor lift(-16, pros::v5::MotorGears::red, pros::v5::MotorUnits::degrees);
 
 // Pneumatics
 // Solenoid: h
-pros::adi::Pneumatics clamp_piston1('h', false);   
+pros::adi::Pneumatics clamp_piston('h', false);   
 // Clamp
-pros::adi::Pneumatics hook_piston1('g', false);  
+pros::adi::Pneumatics latch_piston('g', false);  
 // Switchblade
 pros::adi::Pneumatics switchBlade1('e', false);  
 pros::adi::Pneumatics switchBlade2('f', true);  

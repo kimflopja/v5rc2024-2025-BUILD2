@@ -14,10 +14,14 @@ bool intakeMove = false;
 bool intakeMoveRev = false;
 
 /**
-* preferably dont touch
+* Set Intake Speed
 */
 void setIntake(int power){
     intake.move(power);
+    pros::delay(500);
+    if(intake.get_actual_velocity() <= 0) {
+        setIntake(0);
+    }
 }
 
 /**
