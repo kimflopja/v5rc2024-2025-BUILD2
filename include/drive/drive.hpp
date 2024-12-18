@@ -74,7 +74,7 @@ void auton_swing(int degrees, int units, int speed);
 /*
 * Drive PID algo
 */
-void drivePID(int units, int speed);
+void drivePID();
 
 
 

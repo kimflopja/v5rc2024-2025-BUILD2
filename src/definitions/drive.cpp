@@ -182,6 +182,9 @@ void resetPID(){
     double turnPrevError = 0.0; // Previous Error
     double turnIntegral = 0.0; // Integral term
     double turnDerivative = 0.0; // Derivative Term
+
+    double lateralMotion = 0;
+    double rotationalMotion = 0;
 }
 
 

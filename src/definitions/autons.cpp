@@ -5,82 +5,102 @@
 * DONT touch drivePID or these variables below.
 */
 
-int output = 0; // PID Output
-int error = 0; // Error, Or rather PROPORTIONAL :3
-int prev_error = 0; // Previous Error
-int integral = 0; // Integral term
-int derivative = 0; // Derivative Term
+bool enablePID = true;
+bool resetDrive = true;
+
+double output = 0.0; // PID Output
+double error = 0.0; // Error, Or rather PROPORTIONAL :3
+double prev_error = 0.0; // Previous Error
+double integral = 0.0; // Integral term
+double derivative = 0.0; // Derivative Term
 
 // Turn
-int turnOutput = 0;
-int turnDifference = 0;
-int turnError = 0; // Error, Or rather PROPORTIONAL :3
-int turnPrevError = 0; // Previous Error
-int turnIntegral = 0; // Integral term
-int turnDerivative = 0; // Derivative Term
+double turnOutput = 0.0;
+double turnDifference = 0.0;
+double turnError = 0.0; // Error, Or rather PROPORTIONAL :3
+double turnPrevError = 0.0; // Previous Error
+double turnIntegral = 0.0; // Integral term
+double turnDerivative = 0.0; // Derivative Term
 
-int helpful_range = 1000;
+double lateralMotion = 0.0;
+double rotationalMotion = 0.0;
 
-int kP = 1;
-int kI = 1;
-int kD = 1;
+double targetPosition = 0.0;
+double targetDegrees = 0.0;
+
+double helpful_range = 500;
+
+double kP = 2.0;
+double kI = 0.0;
+double kD = 0.0;
 /*
 * PID drive algorithm
 */
-void drivePID(int units, int degrees){
+void drivePID(){
 
-    // Sensor value
-    int averagePosition = avgDriveEncoderValue();
+    while(enablePID){
 
-    // Error
-    error = averagePosition - units;
-
-    // Integral
-    integral += error;
-    if (error > helpful_range){
-            integral = 0;
-        } else if (error = 0){
-            integral = 0;
+        if(resetDrive){
+            resetPID();
+            resetDriveEncoders();
+            inertial.tare();
+            resetDrive = false;
         }
+        
+        // Sensor value
+        int averagePosition = avgDriveEncoderValue();
+
+        // Error
+        error = targetPosition - averagePosition;
 
 
-    // Derivative
-    derivative = error - prev_error;
+        
+        // Integral
+        integral += error;
+        if (error > helpful_range){
+                integral = 0;
+            } else if (error = 0){
+                integral = 0;
+            }
+        
+        // Derivative
+        derivative = error - prev_error;
 
-    prev_error = error; // Update prev_error
+        // TURN DIFFERENCE
+        //turnDifference = getLeftPosition() - getRightPosition();
+        turnDifference = fabs(inertial.get_rotation());
+        // Turn error
+        turnError = targetDegrees - turnDifference;
 
-    // TURN DIFFERENCE
-    //turnDifference = getLeftPosition() - getRightPosition();
-    turnDifference = fabs(inertial.get_rotation());
-    // Turn error
-    turnError = turnDifference - degrees;
+        // Turn integral
+        turnIntegral += turnError;
 
-    // Turn integral
-    turnIntegral += turnError;
+        // Turn Derivative
+        turnDerivative = turnError - turnPrevError;
+        if (turnError > helpful_range){
+                integral = 0;
+            } else if (error = 0){
+                integral = 0;
+            }
 
-    // Turn Derivative
-    turnDerivative = turnError - turnPrevError;
-    if (turnError > helpful_range){
-            integral = 0;
-        } else if (error = 0){
-            integral = 0;
-        }
+        // Update prev error
+        turnPrevError = error;
+        prev_error = error; // Update prev_error
 
-    // Update prev error
-    turnPrevError = error;
+        // PID output
+        // Using voltage because velocity has its own internal calculations
+        double lateralMotion = (error * kP + integral * kI + derivative * kD); 
 
-    // PID output
-    // Using voltage because velocity has its own internal calculations
-    int lateralMotion = (error * kP + integral * kI + derivative * kD); 
+        // Turn PID output
+        double rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD);
 
-    // Turn PID output
-    int rotationalMotion = (turnError * kP + turnIntegral * kI + turnDerivative * kD);
+        // Drive
+        setDriveVoltage(lateralMotion + rotationalMotion, lateralMotion - rotationalMotion); 
+        
+        // Delay
+        pros::delay(20);
 
-    // Drive
-    setDriveVoltage(lateralMotion + rotationalMotion, lateralMotion - rotationalMotion); 
-    
-    // Delay
-    pros::delay(util::DELAY_TIME);
+    }
 }
 
 /**
@@ -94,20 +114,17 @@ const int AUTON_DELAY_TIME = 200;
 
 /**
 * Below starts AUTON RUNS.
-* You can adjust these, but make sure the same changes are made to the MIRRORED version.
-* Make sure to add a DELAY between each movement.
 */
 
-// Distance = diameter * gearRatio * rotations
-// Diameter =
-// Gear ratio = 5:3
-// Rotations
+
 void driveTest(){
-    resetDriveEncoders();
-    inertial.tare();
-    // drivePID(units, degrees)
-    // Swing is drive + turn at the same time
-    drivePID(300, 0);
+    pros::Task mizumafu(drivePID);
+
+    targetPosition = 200;
+    mizumafu.delay(1000);
+    targetDegrees = 90;
+    
+
 }
 
 /*
@@ -120,29 +137,7 @@ Has not broken any rules.
 
 // Close Side Auton
 void closeSide(){
-    // 1. Go out
-    auton_drive(-600, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 2. Clamp
-    setClamp(clamp);
-    pros::delay(AUTON_DELAY_TIME);
-    // 3. Release intake
-    setLift(3);
-    pros::delay(AUTON_DELAY_TIME);
-    // 4. Spin
-    setIntake(110);
-    // 5. Turn
-    auton_turn(65, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 6. Drive fwd to get red ring
-    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
-    pros::delay(AUTON_DELAY_TIME);
-    // 7. Turn all the way
-    auton_turn(170, TURN_SPEED-15);
-    pros::delay(AUTON_DELAY_TIME);
-    // 9. Drive FWD to side of middle, ride up
-    auton_drive(700, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
+
 }
 
 // Close Side Auton (Mirrored)
@@ -174,29 +169,7 @@ void closeSideMirrored(){
 
 // Far Side Auton
 void farSide(){
-    // 1. Go out
-    auton_drive(-600, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 2. Clamp
-    setClamp(clamp);
-    pros::delay(AUTON_DELAY_TIME);
-    // 3. Release intake
-    setLift(3);
-    pros::delay(AUTON_DELAY_TIME);
-    // 4. Spin
-    setIntake(110);
-    // 5. Turn
-    auton_turn(-60, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 6. Drive fwd to get red ring
-    auton_drive(240, DRIVE_SPEED); // Changed drive fwd
-    pros::delay(AUTON_DELAY_TIME);
-    // 7. Turn all the way
-    auton_turn(-150, TURN_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
-    // 9. Drive FWD to side of middle, ride up
-    auton_drive(700, DRIVE_SPEED);
-    pros::delay(AUTON_DELAY_TIME);
+   
 }
 
 // Far Side Auton (Mirrored)
@@ -231,8 +204,7 @@ void farSideMirrored(){
     pros::delay(AUTON_DELAY_TIME);
 }
 
-
-// Auton Skills #2
+// Auton Skills 
 // THE ONE WE ARE USING
 void autonSkills2(){
     setUpStart();
