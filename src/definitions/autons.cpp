@@ -28,11 +28,15 @@ double rotationalMotion = 0.0;
 double targetPosition = 0.0;
 double targetDegrees = 0.0;
 
-double helpful_range = 500;
+// Constants
+const double helpful_range = 500;
 
-double kP = 2.0;
-double kI = 0.0;
-double kD = 0.0;
+const double kP = 2.0;
+const double kI = 0.0;
+const double kD = 0.0;
+
+const double MAX_VOLTAGE = 12000.0;
+
 /*
 * PID drive algorithm
 */
